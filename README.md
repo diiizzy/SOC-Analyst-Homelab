@@ -29,7 +29,16 @@ Next I wanted to configure the static IP of the internal facing NIC so I used th
 
 The last step before setting up active directory was to check for Windows updates. Windows did find some updates so I went ahead and downloaded them then restarted the machine to install and apply them
 
-Finally, I used the server manager to install the active directory and domain services using the "Add roles and features" option under the manage tab.
+Finally, I used the server manager to install the active directory and domain services using the "Add roles and features" option under the manage tab. Adding the AD DS server role also requires a DNS server. I learned that this is because DNS essentially works as a organization or domain-wide map for where certain services are located. AD DS keeps SRV or service records which tell computers within a domain which server within a domain provides services such as authentication. For my VirtualBox setup this DC01 domain controller server will handle authentication for the other Windows machines that will be joined to the domain. So when someone attempts to login on one of those Windows clients, the client will ask DNS "Who/What server is the domain controller for *domain name that I am joined to*" and DNS will respond with the record that shows the name and IP of the DC01 machine. Then the client will send the login attempt/request to the domain controller, check company records for the user credentials that were entered, and allow them in if they match. 
+
+<img width="1023" height="773" alt="image" src="https://github.com/user-attachments/assets/97300c64-a09a-4fda-a0c0-45eae781516e" />
+
+After this installation I needed to finally promote the server to be the domain controller for the ADDS. To do this we simply use another setup wizard to promote the server to the main Domain Controller and restart the machine to apply the changes.
+
+<img width="1019" height="733" alt="image" src="https://github.com/user-attachments/assets/daf7631d-9660-4c87-bba1-3c8fb0485508" />
+The server manager now shows the new domain that I created and I have access to tools such as the active directory administrative center.
+
+The next step is to use these new active directory tools to create our business structure. This way when we configure the new employee Windows client and join it to the domain we can simulate an employee setting up their new work account. 
 
 
 
