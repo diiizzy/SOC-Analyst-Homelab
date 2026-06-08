@@ -38,7 +38,18 @@ After this installation I needed to finally promote the server to be the domain 
 <img width="1019" height="733" alt="image" src="https://github.com/user-attachments/assets/daf7631d-9660-4c87-bba1-3c8fb0485508" />
 The server manager now shows the new domain that I created and I have access to tools such as the active directory administrative center.
 
-The next step is to use these new active directory tools to create our business structure. This way when we configure the new employee Windows client and join it to the domain we can simulate an employee setting up their new work account. 
+The next step is to use these new active directory tools to create our business structure. This way when we configure the new employee Windows client and join it to the domain we can simulate an employee setting up their new work account. Additionally, these organizational groups allow use to set up group policies that will 
+<img width="751" height="522" alt="image" src="https://github.com/user-attachments/assets/466fd7c7-72bc-41ed-812e-8efd5d055b65" />
+
+Within these Organizational Units I created 3 accounts. An admin account for myself that I can later use instead of the default admin account on the domain controller and two employee accounts that can be used later when setting up the employee machines.
+<img width="751" height="307" alt="image" src="https://github.com/user-attachments/assets/0b28c6e4-9893-4495-ae17-d47ceb3a3d9f" />
+
+My next step is to set up Group Policies for these new organizational units and the domain. At the domain level I applied password security policies so that all users on the domain have password security enforced.
+<img width="818" height="576" alt="image" src="https://github.com/user-attachments/assets/b30f83ed-0e37-4abd-a7a9-207693f93804" />
+<img width="779" height="253" alt="image" src="https://github.com/user-attachments/assets/d0e1a1a1-89e6-4800-93a8-a674746f3fca" />
+
+
+
 
 
 
