@@ -38,7 +38,7 @@ After this installation I needed to finally promote the server to be the domain 
 <img width="1019" height="733" alt="image" src="https://github.com/user-attachments/assets/daf7631d-9660-4c87-bba1-3c8fb0485508" />
 The server manager now shows the new domain that I created and I have access to tools such as the active directory administrative center.
 
-The next step is to use these new active directory tools to create our business structure. This way when we configure the new employee Windows client and join it to the domain we can simulate an employee setting up their new work account. Additionally, these organizational groups allow use to set up group policies that will 
+The next step is to use these new active directory tools to create our business structure. This way when we configure the new employee Windows client and join it to the domain we can simulate an employee setting up their new work account. Additionally, these organizational groups allow us to apply baseline group policy and security configurations for all users within a domain and all workstations in a domain later on.
 <img width="751" height="522" alt="image" src="https://github.com/user-attachments/assets/466fd7c7-72bc-41ed-812e-8efd5d055b65" />
 
 Within these Organizational Units I created 3 accounts. An admin account for myself that I can later use instead of the default admin account on the domain controller and two employee accounts that can be used later when setting up the employee machines.
@@ -47,6 +47,25 @@ Within these Organizational Units I created 3 accounts. An admin account for mys
 My next step is to set up Group Policies for these new organizational units and the domain. At the domain level I applied password security policies so that all users on the domain have password security enforced.
 <img width="818" height="576" alt="image" src="https://github.com/user-attachments/assets/b30f83ed-0e37-4abd-a7a9-207693f93804" />
 <img width="779" height="253" alt="image" src="https://github.com/user-attachments/assets/d0e1a1a1-89e6-4800-93a8-a674746f3fca" />
+
+Next I will set up a baseline workstation security policy for all workstations in the domain. To do this I create and link a new GPO to the top of the "Workstations" organizational unit.
+<img width="759" height="269" alt="image" src="https://github.com/user-attachments/assets/589dc6be-39d7-4a17-ac7f-b359dc2460f8" />
+
+Some of the policies I configured for this baseline are:
+- Disabling the guest account
+- Renaming the administrator account (which I will later completely disable once I have tested the admin account)
+- Disabling anonymous enumeration (Allows unauthorized users to enumerate the devices and users within the network)
+- Enabling the Windows Defender Firewall (Will configure further later)
+
+While I will not be expanding these OUs now to ressemble a larger company or business with multiple departments, it is still valuable to understand how GPO inheritance works. Doing some research I found that other companies' structures benefit from having Workstations and Users OUs and then having separate OUs for each department within those OUs. This way a baseline configuration can be applied to all users and workstations and then additional group policies can be added to the department OUs if modifications need to be made to the baseline for different departments. Since I am going for a more basic example, the structure I have set up now should be fine. 
+
+Next I will set up a baseline user security GPO mostly to prevent regular users/employees from being able to use native Windows tools that give users certain administrative powers. The main things I am going to disable are the use of the control panel, command prompt, and the registry editor.
+<img width="745" height="316" alt="image" src="https://github.com/user-attachments/assets/f448c999-f8c4-44be-b16a-2330290bf1bf" />
+Another important thing to understand about these policies specifically is that they simply prevent users from accessing these applets/GUIs. If these Users somehow still have administrator permissions or the administrator account enabled, a threat actor who knows enough would still be able to find a way to abuse those permissions without accessing these disabled applets. 
+
+These will be the intitial GPOs and security settings that I will be setting up for the domain. I am going to come back and enable logs and auditting when I set up the Wazuh SIEM server. Other additions I want to add once I have joined the employee workstation to the domain is a DHCP server, Windows Update server, a file server, and maybe the Microsoft Local Admin Password Solution.
+
+#1.3 Employee Workstation Setup
 
 
 
