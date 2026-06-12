@@ -66,7 +66,7 @@ Another important thing to understand about these policies specifically is that 
 
 These will be the intitial GPOs and security settings that I will be setting up for the domain. I am going to come back and enable logs and auditting when I set up the Wazuh SIEM server. Other additions I want to add once I have joined the employee workstation to the domain is a DHCP server, Windows Update server, a file server, and maybe the Microsoft Local Admin Password Solution.
 
-#1.3 Employee Workstation Setup
+## 1.3 Employee Workstation Setup
 From research it seems like the best approach is to set up the Windows 10 VM as normal and then join it to the domain. So I went ahead and configured a new Windows 10 VM. I forgot to change some of the network settings so I had to restart it once fully set up to add the extra virtual NIC to simulate the local network that the DC is also located on. Then the next step is to make this new workstations DNS server IP point to the domain controller DNS server. One useful tip that I found in a video is remembering the process names of different control panel applets like ncpa.cpl. This applet will automatically go to the control panel applet for NIC controls so that you don't have to navigate through the control panel or settings GUI everytime.
 
 Additionally, I learned a very valuable networking lesson when trying to join the workstation to the domain. (talk about setting up network adapters properly within the subnet with DNS mask and then DNS server IP)
